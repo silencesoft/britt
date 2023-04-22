@@ -4,15 +4,15 @@ import { Text } from 'react-native-paper';
 
 type Props = {};
 
-const HomeScreen = (props: Props) => {
+const ScanScreen = (props: Props) => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>Read</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default ScanScreen;
 
 const styles = StyleSheet.create({
   container: {
