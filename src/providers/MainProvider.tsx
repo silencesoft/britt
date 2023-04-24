@@ -1,6 +1,7 @@
 import React from 'react';
 
 import RouteProvider from './RouteProvider';
+import StateProvider from './StateProvider';
 import ThemeContextProvider from './ThemeProvider';
 
 type Props = {
@@ -9,9 +10,11 @@ type Props = {
 
 const MainProvider = ({ children }: Props) => {
   return (
-    <ThemeContextProvider>
-      <RouteProvider>{children}</RouteProvider>
-    </ThemeContextProvider>
+    <StateProvider>
+      <ThemeContextProvider>
+        <RouteProvider>{children}</RouteProvider>
+      </ThemeContextProvider>
+    </StateProvider>
   );
 };
 
