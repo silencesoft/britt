@@ -4,5 +4,5 @@ export type RootStackParamList = {
   Home: undefined;
   Scan: undefined;
   Settings: undefined;
-  Detail: undefined;
+  Receive: undefined;
 };

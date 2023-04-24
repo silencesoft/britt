@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import Content from './Content';
 import Header from './Header';
+import Menu from './Menu';
 
 type Props = {};
 
@@ -11,6 +12,7 @@ const Home = (props: Props) => {
     <View style={styles.container}>
       <Header />
       <Content />
+      <Menu />
     </View>
   );
 };

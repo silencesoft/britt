@@ -5,8 +5,8 @@ import React, { useEffect, useState } from 'react';
 
 import { RootStackParamList } from 'src/constants/RootStackParamList';
 import Authentication from 'src/screens/authentication';
-import DetailScreen from 'src/screens/detail';
 import LoginScreen from 'src/screens/login';
+import ReceiveScreen from 'src/screens/receive';
 import { userAtom } from 'src/state/user';
 import ScreenNavigator from './ScreenNavigator';
 
@@ -50,7 +50,7 @@ const MainNavigator = (props: Props) => {
       {!!user && (
         <>
           <Stack.Screen name="Screen" component={ScreenNavigator} />
-          <Stack.Screen name="Detail" component={DetailScreen} />
+          <Stack.Screen name="Receive" component={ReceiveScreen} />
         </>
       )}
       {!user && <Stack.Screen name="Login" component={LoginScreen} />}

@@ -7,18 +7,18 @@ import { RootStackParamList } from 'src/constants/RootStackParamList';
 
 type Props = {};
 
-const DetailScreen = (props: Props) => {
+const ReceiveScreen = (props: Props) => {
   const navigation = useNavigation<RootStackParamList>();
 
   return (
     <View>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
-        <Appbar.Content title="Title" />
+        <Appbar.Content title="Receive" />
       </Appbar.Header>
       <Text>Detail</Text>
     </View>
   );
 };
 
-export default DetailScreen;
+export default ReceiveScreen;
