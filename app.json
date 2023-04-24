@@ -17,6 +17,9 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSFaceIDUsageDescription": "Face ID is used to authenticate the user."
+      },
+      "config": {
+        "usesNonExemptEncryption": false
       }
     },
     "android": {

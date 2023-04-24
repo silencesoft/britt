@@ -1,13 +1,18 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-paper';
+
+import Home from 'src/components/Home';
+import { RootStackParamList } from 'src/constants/RootStackParamList';
 
 type Props = {};
 
 const HomeScreen = (props: Props) => {
+  const navigation = useNavigation<RootStackParamList>();
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Home />
     </View>
   );
 };
