@@ -15,7 +15,7 @@ const Balance = (props: Props) => {
 
   return (
     <View>
-      <Text>
+      <Text variant="displayLarge">
         {balance.balance} {balance.unit}
       </Text>
     </View>

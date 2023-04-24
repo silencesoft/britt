@@ -7,7 +7,6 @@ import { Button, Text } from 'react-native-paper';
 
 import { useAutoExchange } from 'src/hooks/useAutoExchange';
 import { userAtom } from 'src/state/user';
-import { save } from 'src/utils/store';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -60,8 +59,7 @@ const LoginScreen = (props: Props) => {
 
   useEffect(() => {
     if (token?.accessToken) {
-      save('refresh', token.refreshToken || '');
-      setUser(token.accessToken);
+      setUser(token);
     }
   }, [token]);
 
