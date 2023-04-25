@@ -1,3 +1,4 @@
+import { useIsFocused } from '@react-navigation/native';
 import { Camera } from 'expo-camera';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -9,6 +10,7 @@ type Props = {};
 const ScanScreen = (props: Props) => {
   const [loading, setLoading] = useState(true);
   const [hasPermission, setHasPermission] = useState(false);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     (async () => {
@@ -17,6 +19,14 @@ const ScanScreen = (props: Props) => {
       setLoading(false);
     })();
   }, []);
+
+  if (!isFocused) {
+    return (
+      <View style={styles.container}>
+        <Text>&nbsp;</Text>
+      </View>
+    );
+  }
 
   if (loading)
     return (
