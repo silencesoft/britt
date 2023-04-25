@@ -3,15 +3,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-import { balanceAtom, userAtom } from 'src/state/user';
+import { balanceAtom } from 'src/state/user';
 
 type Props = {};
 
 const Balance = (props: Props) => {
-  const user = useAtomValue(userAtom);
   const balance = useAtomValue(balanceAtom);
-
-  console.log({ user, balance });
 
   return (
     <View>

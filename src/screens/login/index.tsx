@@ -44,7 +44,6 @@ const LoginScreen = (props: Props) => {
     },
     discovery
   );
-  console.log({ request, response, promptAsync });
   const {
     // The token will be auto exchanged after auth completes.
     token,
