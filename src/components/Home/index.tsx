@@ -1,3 +1,4 @@
+import { useIsFocused } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -8,11 +9,13 @@ import Menu from './Menu';
 type Props = {};
 
 const Home = (props: Props) => {
+  const isFocused = useIsFocused();
+
   return (
     <View style={styles.container}>
       <Header />
       <Content />
-      <Menu />
+      {isFocused && <Menu />}
     </View>
   );
 };
