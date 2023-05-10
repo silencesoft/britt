@@ -29,6 +29,17 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "intentFilters": [
+        {
+          "autoVerify": true,
+          "action": "VIEW",
+          "data": {
+            "scheme": "msauth",
+            "host": "net.silencesoft.britt"
+          },
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
       "package": "net.silencesoft.britt",
       "permissions": [
         "android.permission.USE_BIOMETRIC",
