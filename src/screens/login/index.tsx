@@ -62,7 +62,7 @@ const LoginScreen = (props: Props) => {
   }, [token]);
 
   const handleLogin = async () => {
-    promptAsync({ useProxy });
+    promptAsync({});
   };
 
   return (
