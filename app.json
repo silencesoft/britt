@@ -3,6 +3,7 @@
     "name": "Britt",
     "slug": "britt",
     "version": "0.1.0",
+    "owner": "silencesoft",
     "orientation": "portrait",
     "scheme": "britt.app",
     "icon": "./assets/icon.png",
@@ -16,17 +17,25 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSFaceIDUsageDescription": "Face ID is used to authenticate the user."
+        "NSFaceIDUsageDescription": "Allow $(PRODUCT_NAME) to use Face ID."
       },
       "config": {
         "usesNonExemptEncryption": false
-      }
+      },
+      "bundleIdentifier": "net.silencesoft.britt"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "net.silencesoft.britt",
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -44,6 +53,11 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c5bc1d83-a47a-41cf-af04-22e65e83a8fa"
+      }
+    }
   }
 }

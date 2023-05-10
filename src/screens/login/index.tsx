@@ -23,10 +23,9 @@ const LoginScreen = (props: Props) => {
     tokenEndpoint: `${process.env.API_URL}/oauth/token`,
     revocationEndpoint: `${process.env.API_URL}/oauth/revoke`,
   };
-  const redirectUri = makeRedirectUri({
-    scheme: 'britt.app',
-    useProxy,
-  });
+
+  const redirectUri = makeRedirectUri({});
+
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId,
