@@ -5,7 +5,7 @@
     "version": "0.1.0",
     "owner": "silencesoft",
     "orientation": "portrait",
-    "scheme": "britt.app",
+    "scheme": "net.silencesoft.britt",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
