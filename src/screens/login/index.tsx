@@ -1,5 +1,6 @@
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import Constants from 'expo-constants';
+import * as WebBrowser from 'expo-web-browser';
 import { useSetAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
@@ -9,7 +10,7 @@ import { useAutoExchange } from 'src/hooks/useAutoExchange';
 import { externalInvoiceAtom } from 'src/state/invoice';
 import { userAtom } from 'src/state/user';
 
-// WebBrowser.maybeCompleteAuthSession();
+WebBrowser.maybeCompleteAuthSession();
 
 type Props = {};
 
