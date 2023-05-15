@@ -99,6 +99,26 @@ const LoginScreen = (props: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleDeepLinking = async (url: string | null): Promise<void> => {
+      if (!url) return;
+      const correctUrl = url.includes('#') ? url.replace('#', '?') : url;
+      const urlObject = new URL(correctUrl);
+      const accessToken = urlObject.searchParams.get('code');
+      const refreshToken = ''; // urlObject.searchParams.get('refresh_token');
+      if (!accessToken || !refreshToken) return;
+      setCode(accessToken);
+    };
+    const listener = (event: { url: string }) => {
+      void handleDeepLinking(event.url);
+    };
+    const subscription = Linking.addEventListener('url', listener);
+    void Linking.getInitialURL().then((url) => handleDeepLinking(url));
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>Login</Text>
