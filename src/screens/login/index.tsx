@@ -99,26 +99,6 @@ const LoginScreen = (props: Props) => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleDeepLinking = async (url: string | null): Promise<void> => {
-      if (!url) return;
-      const correctUrl = url.includes('#') ? url.replace('#', '?') : url;
-      const urlObject = new URL(correctUrl);
-      const accessToken = urlObject.searchParams.get('code');
-      const refreshToken = ''; // urlObject.searchParams.get('refresh_token');
-      if (!accessToken || !refreshToken) return;
-      setCode(accessToken);
-    };
-    const listener = (event: { url: string }) => {
-      void handleDeepLinking(event.url);
-    };
-    const subscription = Linking.addEventListener('url', listener);
-    void Linking.getInitialURL().then((url) => handleDeepLinking(url));
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
   return (
     <View style={styles.container}>
       <Text>Login</Text>
@@ -128,6 +108,8 @@ const LoginScreen = (props: Props) => {
       <Text>response:: {JSON.stringify(response?.type)}</Text>
       <Text>response:: {JSON.stringify(response?.params)}</Text>
       <Text>code:: {code}</Text>
+      <Text>response:: {JSON.stringify(respo?.type)}</Text>
+      <Text>response:: {JSON.stringify(respo?.params)}</Text>
       <Button mode="contained" onPress={handleLogin} disabled={!request}>
         <Text variant="headlineSmall">Go</Text>
       </Button>
