@@ -1,6 +1,5 @@
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import Constants from 'expo-constants';
-import * as WebBrowser from 'expo-web-browser';
 import { useSetAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
@@ -71,10 +70,13 @@ const LoginScreen = (props: Props) => {
     }
   }, [token]);
 
+  const [url, setUrl] = useState('');
+
   // Fix from https://github.com/expo/expo/issues/12044
   useEffect(() => {
     const handleDeepLinking = async (url: string | null): Promise<void> => {
       if (!url) return;
+      setUrl(url);
       const correctUrl = url.includes('#') ? url.replace('#', '?') : url;
       const urlObject = new URL(correctUrl);
       const accessToken = urlObject.searchParams.get('code');
@@ -110,6 +112,7 @@ const LoginScreen = (props: Props) => {
       <Text>code:: {code}</Text>
       <Text>response:: {JSON.stringify(respo?.type)}</Text>
       <Text>response:: {JSON.stringify(respo?.params)}</Text>
+      <Text>url:: {url}</Text>
       <Button mode="contained" onPress={handleLogin} disabled={!request}>
         <Text variant="headlineSmall">Go</Text>
       </Button>
