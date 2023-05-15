@@ -10,7 +10,7 @@ import { useAutoExchange } from 'src/hooks/useAutoExchange';
 import { externalInvoiceAtom } from 'src/state/invoice';
 import { userAtom } from 'src/state/user';
 
-WebBrowser.maybeCompleteAuthSession();
+// WebBrowser.maybeCompleteAuthSession();
 
 type Props = {};
 
