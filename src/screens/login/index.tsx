@@ -2,8 +2,13 @@ import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import Constants from 'expo-constants';
 import * as WebBrowser from 'expo-web-browser';
 import { useSetAtom } from 'jotai';
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
+=======
+import React, { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+>>>>>>> 8832585 (Update login.)
 import { Button, Text } from 'react-native-paper';
 
 import { useAutoExchange } from 'src/hooks/useAutoExchange';
@@ -28,6 +33,9 @@ const LoginScreen = (props: Props) => {
     tokenEndpoint: `${process.env.API_URL}/oauth/token`,
     revocationEndpoint: `${process.env.API_URL}/oauth/revoke`,
   };
+
+  console.log({ redirectUri });
+
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId,
@@ -100,6 +108,8 @@ const LoginScreen = (props: Props) => {
     <View style={styles.container}>
       <Text>Login</Text>
       <Text>API:: {serverUrl}</Text>
+      <Text>redirectUri:: {redirectUri}</Text>
+      <Text>token:: {JSON.stringify(token)}</Text>
       <Button mode="contained" onPress={handleLogin} disabled={!request}>
         <Text variant="headlineSmall">Go</Text>
       </Button>
