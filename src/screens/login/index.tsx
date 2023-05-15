@@ -85,6 +85,8 @@ const LoginScreen = (props: Props) => {
       if (extPayment) {
         setExternalInvoice(correctUrl);
       }
+      // const refreshToken = ''; // urlObject.searchParams.get('refresh_token');
+      alert(accessToken);
       if (!accessToken) return;
       setCode(accessToken);
     };
