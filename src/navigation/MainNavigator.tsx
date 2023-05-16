@@ -32,9 +32,10 @@ const MainNavigator = (props: Props) => {
 
   useEffect(() => {
     (async () => {
-      const compatible = await LocalAuthentication.hasHardwareAsync();
-      const biometricRecords = await LocalAuthentication.isEnrolledAsync();
-      setIsBiometricSupported(compatible && biometricRecords);
+      const secure = await LocalAuthentication.getEnrolledLevelAsync();
+      // const compatible = await LocalAuthentication.hasHardwareAsync();
+      // const biometricRecords = await LocalAuthentication.isEnrolledAsync();
+      setIsBiometricSupported(secure !== LocalAuthentication.SecurityLevel.NONE);
     })();
   });
 
