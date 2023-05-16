@@ -19,7 +19,10 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingTop: 40,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
     width: '100%',
   },
 });

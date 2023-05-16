@@ -4,6 +4,7 @@ import { useAtomValue } from 'jotai';
 import React, { useEffect, useState } from 'react';
 
 import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { useSettings } from 'src/hooks/useSettings';
 import Authentication from 'src/screens/authentication';
 import LoginScreen from 'src/screens/login';
 import ReceiveScreen from 'src/screens/receive';
@@ -16,6 +17,7 @@ type Props = {};
 
 const MainNavigator = (props: Props) => {
   const user = useAtomValue(userAtom);
+  const { settings } = useSettings();
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -35,7 +37,7 @@ const MainNavigator = (props: Props) => {
       const secure = await LocalAuthentication.getEnrolledLevelAsync();
       // const compatible = await LocalAuthentication.hasHardwareAsync();
       // const biometricRecords = await LocalAuthentication.isEnrolledAsync();
-      setIsBiometricSupported(secure !== LocalAuthentication.SecurityLevel.NONE);
+      setIsBiometricSupported(secure !== LocalAuthentication.SecurityLevel.NONE && settings.biometric);
     })();
   });
 
