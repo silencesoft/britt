@@ -34,7 +34,7 @@
           "autoVerify": true,
           "action": "VIEW",
           "data": {
-            "scheme": "msauth",
+            "scheme": "net.silencesoft.britt",
             "host": "net.silencesoft.britt"
           },
           "category": ["BROWSABLE", "DEFAULT"]
