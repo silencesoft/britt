@@ -1,7 +1,9 @@
 import React from 'react';
+
 import 'react-native-get-random-values';
 import 'react-native-url-polyfill/auto';
 import * as encoding from 'text-encoding';
+import 'react-native-url-polyfill/auto';
 
 import MainNavigator from 'src/navigation/MainNavigator';
 import MainProvider from 'src/providers/MainProvider';
