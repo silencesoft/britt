@@ -1,4 +1,4 @@
-import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
+import { AuthSessionResult, makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import Constants from 'expo-constants';
 import * as WebBrowser from 'expo-web-browser';
 import { useSetAtom } from 'jotai';
@@ -29,7 +29,7 @@ const LoginScreen = (props: Props) => {
     revocationEndpoint: `${process.env.API_URL}/oauth/revoke`,
   };
 
-  console.log({ redirectUri });
+  console.log({ redirectUri, code });
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -61,8 +61,12 @@ const LoginScreen = (props: Props) => {
   );
   const setExternalInvoice = useSetAtom(externalInvoiceAtom);
 
+  const [respo, setRespo] = useState<AuthSessionResult | null>(null);
+
   const handleLogin = async () => {
-    await promptAsync({ showInRecents: true });
+    promptAsync({ showInRecents: true }).then(async (response) => {
+      setRespo(response);
+    });
   };
 
   useEffect(() => {
@@ -74,6 +78,9 @@ const LoginScreen = (props: Props) => {
   const [url, setUrl] = useState('');
 
   // Fix from https://github.com/expo/expo/issues/12044
+
+  const [url, setUrl] = useState('');
+  // https://github.com/expo/expo/issues/12044
   useEffect(() => {
     const handleDeepLinking = async (url: string | null): Promise<void> => {
       if (!url) return;
@@ -86,7 +93,7 @@ const LoginScreen = (props: Props) => {
         setExternalInvoice(correctUrl);
       }
       // const refreshToken = ''; // urlObject.searchParams.get('refresh_token');
-      alert(accessToken);
+      console.log({ url, correctUrl, accessToken });
       if (!accessToken) return;
       setCode(accessToken);
     };
