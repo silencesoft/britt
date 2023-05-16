@@ -1,16 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useEffect } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 type Props = {
   handleAuthenticate: () => void;
 };
 
 const Authentication = ({ handleAuthenticate }: Props) => {
-  handleAuthenticate();
+  useEffect(() => {
+    handleAuthenticate();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <TouchableOpacity onPress={handleAuthenticate}>
+        <Ionicons name="finger-print" size={48} color="black" />
+      </TouchableOpacity>
     </View>
   );
 };
