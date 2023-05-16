@@ -33,7 +33,8 @@ const MainNavigator = (props: Props) => {
   useEffect(() => {
     (async () => {
       const compatible = await LocalAuthentication.hasHardwareAsync();
-      setIsBiometricSupported(compatible);
+      const biometricRecords = await LocalAuthentication.isEnrolledAsync();
+      setIsBiometricSupported(compatible && biometricRecords);
     })();
   });
 
