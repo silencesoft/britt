@@ -9,6 +9,7 @@ import { getValueFor, save } from 'src/utils/store';
 
 export const userPromiseAtom = atom<Promise<TokenResponse | null>>(async () => {
   const user = JSON.parse((await getValueFor('code')) || '') as TokenResponse;
+  console.log({ user });
 
   return user;
 });
