@@ -5,7 +5,7 @@
     "version": "0.1.0",
     "owner": "silencesoft",
     "orientation": "portrait",
-    "scheme": "net.silencesoft.britt",
+    "scheme": ["net.silencesoft.britt", "lightning"],
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {

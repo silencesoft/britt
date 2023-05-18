@@ -7,6 +7,7 @@ import {
   MD3LightTheme as PaperDefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
+import { useSettings } from 'src/hooks/useSettings';
 
 const lightTheme = {
   ...NavigationDefaultTheme,
@@ -53,13 +54,19 @@ interface ThemeContextProviderProps {
 }
 
 export const ThemeContextProvider = ({ children }: ThemeContextProviderProps) => {
+  const { settings } = useSettings();
+  const isDarkSet = settings?.darkTheme ? 'dark' : 'light';
+  const settingsTheme: ThemeType | undefined = settings?.darkTheme !== undefined ? isDarkSet : undefined;
   const colorScheme = useColorScheme();
-  const [themeType, setThemeType] = useState<ThemeType>(colorScheme || 'light');
+  const [themeType, setThemeType] = useState<ThemeType>(settingsTheme || colorScheme || 'light');
   const toggleThemeType = useCallback(() => {
     setThemeType((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }, []);
-  const isDarkTheme = useMemo(() => themeType === 'dark', [themeType]);
-  const theme = useMemo(() => (isDarkTheme ? darkTheme : lightTheme), [isDarkTheme]);
+  const isDarkTheme = useMemo(
+    () => (settingsTheme !== undefined ? settingsTheme === 'dark' : themeType === 'dark'),
+    [themeType, settingsTheme]
+  );
+  const theme = useMemo(() => (isDarkTheme ? darkTheme : lightTheme), [isDarkTheme, settingsTheme]);
   const values = useMemo(() => {
     return {
       theme,

@@ -6,6 +6,7 @@ import { getValueFor, save } from 'src/utils/store';
 
 const defaultaValues: Settings = {
   biometric: true,
+  darkTheme: undefined,
 };
 
 export const settingsPromiseAtom = atom<Promise<Settings | null>>(async () => {
