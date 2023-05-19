@@ -1,4 +1,4 @@
-export const doPayment = async (token: string, invoice: string) => {
+export const doPayment = async (token: string, invoice: string, amount: string) => {
   const endpoint = `${process.env.API_URL}/payments/bolt11`;
   const options = {
     method: 'POST',
@@ -7,8 +7,8 @@ export const doPayment = async (token: string, invoice: string) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     }),
     body: JSON.stringify({
-      amount: 0,
       invoice,
+      amount: parseInt(amount),
     }),
   };
 

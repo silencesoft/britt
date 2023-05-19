@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
-import Pay from './Pay';
+import Form from './Form';
 
 type Props = {};
 
@@ -39,8 +39,12 @@ const Scan = (props: Props) => {
     }
   };
 
+  const handleCancel = () => {
+    setInvoice('');
+  };
+
   if (invoice) {
-    return <Pay invoice={invoice} />;
+    return <Form invoice={invoice} handleCancel={handleCancel} />;
   }
 
   return (

@@ -11,22 +11,24 @@ import { userAtom } from 'src/state/user';
 
 type Props = {
   invoice: string;
+  amount: string;
 };
 
-const Pay = ({ invoice }: Props) => {
+const Pay = ({ invoice, amount }: Props) => {
   const [isValid, setIsValid] = useState(invoice.startsWith('lnbc'));
   // const isEmail = /\b[a-z0-9-_.]+@[a-z0-9-_.]+(\.[a-z0-9]+)+/i.test(invoice);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
   const user = useAtomValue(userAtom);
   const navigation = useNavigation<RootStackParamList>();
 
   useEffect(() => {
     const tryPayment = async () => {
-      const response = await doPayment(user?.accessToken, invoice);
+      const response = await doPayment(user?.accessToken, invoice, amount);
       console.log(response);
 
       if (!response?.destination) {
-        setIsValid(false);
+	setError(response.message);
       } else {
         setSuccess(true);
       }
@@ -41,7 +43,7 @@ const Pay = ({ invoice }: Props) => {
     return (
       <View style={{ flex: 1, width: '100%' }}>
         <Appbar.Header>
-          <Appbar.BackAction onPress={() => navigation.navigate('Scan')} />
+          <Appbar.BackAction onPress={() => navigation.navigate('Screen')} />
           <Appbar.Content title="Receive" />
         </Appbar.Header>
         <View style={styles.container}>
@@ -55,7 +57,7 @@ const Pay = ({ invoice }: Props) => {
   return (
     <View style={{ flex: 1, width: '100%' }}>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.navigate('Scan')} />
+        <Appbar.BackAction onPress={() => navigation.navigate('Screen')} />
         <Appbar.Content title="Receive" />
       </Appbar.Header>
       <View style={styles.container}>
@@ -65,7 +67,13 @@ const Pay = ({ invoice }: Props) => {
             <Text style={{ marginTop: 40 }}>Payment done.</Text>
           </>
         )}
-        {!success && <ActivityIndicator />}
+        {!success && !error && <ActivityIndicator />}
+        {!!error && (
+	  <>
+	    <Feather name="x-circle" size={48} />
+	    <Text style={{ marginTop: 40 }}>{error}</Text>
+	  </>
+	)}
       </View>
     </View>
   );
