@@ -2,17 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import { decode } from 'light-bolt11-decoder';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Appbar, Button, Text, TextInput } from 'react-native-paper';
+import { Button, Text, TextInput } from 'react-native-paper';
 
 import { RootStackParamList } from 'src/constants/RootStackParamList';
 import Pay from '../Pay';
 
 type Props = {
   invoice: string;
-  handleCancel: () => void;
 };
 
-const Form = ({ handleCancel, invoice }: Props) => {
+const Form = ({ invoice }: Props) => {
   const [amount, setAmount] = useState('');
   const [value, setValue] = useState(invoice);
   const [payment, setPayment] = useState(false);
@@ -39,10 +38,6 @@ const Form = ({ handleCancel, invoice }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.navigate('Screen')} />
-        <Appbar.Content title="Invoice" />
-      </Appbar.Header>
       <Text>Invoice Amount</Text>
       <View style={styles.formContainer}>
         <TextInput
@@ -65,7 +60,7 @@ const Form = ({ handleCancel, invoice }: Props) => {
         />
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity onPress={() => handleCancel()} style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button}>
           <Button icon="close" mode="outlined">
             Cancel
           </Button>

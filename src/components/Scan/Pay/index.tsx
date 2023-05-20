@@ -1,11 +1,10 @@
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import { useAtomValue } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ActivityIndicator, Appbar, Text } from 'react-native-paper';
+import { ActivityIndicator, Text } from 'react-native-paper';
 
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { useTheme } from 'src/providers/ThemeProvider';
 import { doPayment } from 'src/services/doPayment';
 import { userAtom } from 'src/state/user';
 
@@ -20,7 +19,7 @@ const Pay = ({ invoice, amount }: Props) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const user = useAtomValue(userAtom);
-  const navigation = useNavigation<RootStackParamList>();
+  const {theme} = useTheme();
 
   useEffect(() => {
     const tryPayment = async () => {
@@ -41,40 +40,28 @@ const Pay = ({ invoice, amount }: Props) => {
 
   if (!isValid) {
     return (
-      <View style={{ flex: 1, width: '100%' }}>
-        <Appbar.Header>
-          <Appbar.BackAction onPress={() => navigation.navigate('Screen')} />
-          <Appbar.Content title="Receive" />
-        </Appbar.Header>
-        <View style={styles.container}>
-          <Text>Invalid invoice.</Text>
-          <Text>Only bolt11 invoices supported.</Text>
-        </View>
+      <View style={styles.container}>
+        <Text>Invalid invoice.</Text>
+        <Text>Only bolt11 invoices supported.</Text>
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1, width: '100%' }}>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.navigate('Screen')} />
-        <Appbar.Content title="Receive" />
-      </Appbar.Header>
-      <View style={styles.container}>
-        {success && (
-          <>
-            <Feather name="check-circle" size={48} />
-            <Text style={{ marginTop: 40 }}>Payment done.</Text>
-          </>
-        )}
-        {!success && !error && <ActivityIndicator />}
-        {!!error && (
-          <>
-            <Feather name="x-circle" size={48} />
-            <Text style={{ marginTop: 40 }}>{error}</Text>
-          </>
-        )}
-      </View>
+    <View style={styles.container}>
+      {success && (
+        <>
+          <Feather name="check-circle" size={48} color={theme.colors.primary} />
+          <Text style={{ marginTop: 40 }}>Payment done.</Text>
+        </>
+      )}
+      {!success && !error && <ActivityIndicator />}
+      {!!error && (
+        <>
+          <Feather name="x-circle" size={48} color={theme.colors.primary} />
+          <Text style={{ marginTop: 40 }}>{error}</Text>
+        </>
+      )}
     </View>
   );
 };

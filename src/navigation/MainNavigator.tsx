@@ -7,6 +7,7 @@ import { RootStackParamList } from 'src/constants/RootStackParamList';
 import { useSettings } from 'src/hooks/useSettings';
 import Authentication from 'src/screens/authentication';
 import LoginScreen from 'src/screens/login';
+import PayScreen from 'src/screens/pay';
 import ReceiveScreen from 'src/screens/receive';
 import { userAtom } from 'src/state/user';
 import ScreenNavigator from './ScreenNavigator';
@@ -55,6 +56,7 @@ const MainNavigator = (props: Props) => {
         <>
           <Stack.Screen name="Screen" component={ScreenNavigator} />
           <Stack.Screen name="Receive" component={ReceiveScreen} />
+          <Stack.Screen name="Pay" component={PayScreen} initialParams={{ invoice: '' }} />
         </>
       )}
       {!user && <Stack.Screen name="Login" component={LoginScreen} />}

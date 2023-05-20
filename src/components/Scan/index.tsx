@@ -2,16 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { AutoFocus, BarCodeScanningResult, Camera, CameraType, FlashMode } from 'expo-camera';
 import * as Clipboard from 'expo-clipboard';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
-import Form from './Form';
+import { RootStackParamList } from 'src/constants/RootStackParamList';
 
 type Props = {};
 
 const Scan = (props: Props) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackParamList>();
   const [cameraFlash, setCameraFlash] = useState(FlashMode.off);
   const [invoice, setInvoice] = useState('');
 
@@ -30,6 +30,7 @@ const Scan = (props: Props) => {
       //       })
       //     : { state: 'granted' };
       // if (state == 'granted' || state == 'prompt') {
+
       const text = await Clipboard.getStringAsync();
 
       setInvoice(text.replace('lightning:', ''));
@@ -39,13 +40,11 @@ const Scan = (props: Props) => {
     }
   };
 
-  const handleCancel = () => {
-    setInvoice('');
-  };
-
-  if (invoice) {
-    return <Form invoice={invoice} handleCancel={handleCancel} />;
-  }
+  useEffect(() => {
+    if (invoice) {
+      navigation.navigate('Pay', { invoice: invoice });
+    }
+  }, [invoice]);
 
   return (
     <View style={styles.container}>

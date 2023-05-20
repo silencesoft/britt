@@ -5,4 +5,5 @@ export type RootStackParamList = {
   Scan: undefined;
   Settings: undefined;
   Receive: undefined;
+  Pay: { invoice: string };
 };
