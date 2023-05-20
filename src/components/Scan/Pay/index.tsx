@@ -15,7 +15,7 @@ type Props = {
 };
 
 const Pay = ({ invoice, amount }: Props) => {
-  const [isValid, setIsValid] = useState(invoice.startsWith('lnbc'));
+  const [isValid, setIsValid] = useState(invoice.toLowerCase().startsWith('lnbc'));
   // const isEmail = /\b[a-z0-9-_.]+@[a-z0-9-_.]+(\.[a-z0-9]+)+/i.test(invoice);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -28,7 +28,7 @@ const Pay = ({ invoice, amount }: Props) => {
       console.log(response);
 
       if (!response?.destination) {
-	setError(response.message);
+        setError(response.message);
       } else {
         setSuccess(true);
       }
@@ -69,11 +69,11 @@ const Pay = ({ invoice, amount }: Props) => {
         )}
         {!success && !error && <ActivityIndicator />}
         {!!error && (
-	  <>
-	    <Feather name="x-circle" size={48} />
-	    <Text style={{ marginTop: 40 }}>{error}</Text>
-	  </>
-	)}
+          <>
+            <Feather name="x-circle" size={48} />
+            <Text style={{ marginTop: 40 }}>{error}</Text>
+          </>
+        )}
       </View>
     </View>
   );

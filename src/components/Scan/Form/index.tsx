@@ -28,7 +28,9 @@ const Form = ({ handleCancel, invoice }: Props) => {
         const amount = parseInt(values[0].value) / 1000;
         setAmount(amount.toString());
       }
-    } catch {}
+    } catch (e) {
+      console.log({ e });
+    }
   }, [invoice, value]);
 
   if (payment) {
@@ -48,6 +50,7 @@ const Form = ({ handleCancel, invoice }: Props) => {
           numberOfLines={3}
           style={styles.inputText}
           maxLength={500}
+          value={value}
           onChangeText={(text) => setValue(text)}
           placeholder="Invoice"
         />

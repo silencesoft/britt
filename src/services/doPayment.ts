@@ -4,7 +4,7 @@ export const doPayment = async (token: string, invoice: string, amount: string) 
     method: 'POST',
     headers: new Headers({
       Authorization: 'Bearer ' + token,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     }),
     body: JSON.stringify({
       invoice,
