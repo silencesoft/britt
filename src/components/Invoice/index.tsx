@@ -1,26 +1,34 @@
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import * as Clipboard from 'expo-clipboard';
+import * as Linking from 'expo-linking';
 import { useAtomValue } from 'jotai';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator, Button, IconButton, Snackbar, Text, TextInput } from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 
 import { Invoice } from 'src/interfaces/invoice';
+import { useTheme } from 'src/providers/ThemeProvider';
 import { createInvoice } from 'src/services/createInvoice';
+import { getPayment } from 'src/services/getPayment';
 import { userAtom } from 'src/state/user';
 import UserQR from './UserQR';
 
 type Props = {};
 
+const TIMEOUT_MS = 10000;
+
 const CreateInvoice = (props: Props) => {
   const navigation = useNavigation();
   const user = useAtomValue(userAtom);
+  const { theme } = useTheme();
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const [requestRunning, setRequestRunning] = useState(false);
   const [invoice, setInvoice] = useState<Invoice | null>(null);
+  const [finish, setFinish] = useState<boolean | null>(null);
 
   const onToggleSnackBar = () => setError('');
 
@@ -33,11 +41,48 @@ const CreateInvoice = (props: Props) => {
   const handleSavePost = async () => {
     setRequestRunning(true);
     const response = await createInvoice(user.accessToken, amount, description);
-    setRequestRunning(false);
     if (response?.payment_request) {
       setInvoice(response);
     }
+    setRequestRunning(false);
   };
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    const waitForPayment = async (invoiceId: string) => {
+      if (finish !== null || !invoiceId) {
+        return;
+      }
+
+      const expire = new Date(invoice?.expires_at || '');
+      const now = new Date();
+
+      if (expire < now) {
+        setFinish(false);
+      }
+
+      const payment = await getPayment(user.accessToken, invoiceId, abortController);
+
+      if (payment) {
+        if (payment.status === 'paid') {
+          setFinish(true);
+        } else if (payment.status === 'expired') {
+          setFinish(false);
+        }
+      }
+    };
+
+    const interval = setInterval(() => {
+      waitForPayment(invoice?.payment_hash || '');
+    }, TIMEOUT_MS);
+
+    return () => {
+      clearInterval(interval);
+      abortController.abort();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [invoice]);
 
   if (requestRunning) {
     return (
@@ -51,15 +96,49 @@ const CreateInvoice = (props: Props) => {
     const value = invoice.payment_request;
     const url = `lightning:${value}`;
 
+    const handleClick = () => {
+      Linking.openURL(url);
+    };
+
     return (
       <View style={styles.container}>
-        <Text style={{ marginBottom: 20 }}>Amount: {amount} satoshis</Text>
-        <Text>Description:</Text>
-        <Text style={{ marginBottom: 20 }}> {description}</Text>
-        <QRCode value={url} size={300} />
-        <Text style={{ marginTop: 20, maxWidth: 300 }}>{value}</Text>
-        <IconButton icon="content-copy" onPress={() => handleCopyToClipboard(value)} />
-        <Text style={{ marginBottom: 20 }}> {invoice.expires_at}</Text>
+        <Text>Amount:</Text>
+        <Text style={{ marginBottom: 20 }}> {amount} satoshis</Text>
+        {!!description && (
+          <>
+            <Text>Description:</Text>
+            <Text style={{ marginBottom: 20 }}> {description}</Text>
+          </>
+        )}
+        {finish && (
+          <>
+            <Feather name="check-circle" size={48} color={theme.colors.primary} />
+            <Text>Payment Received</Text>
+          </>
+        )}
+        {finish === false && (
+          <>
+            <Feather name="x-circle" size={48} color={theme.colors.primary} />
+            <Text>Invoice Expired</Text>
+          </>
+        )}
+        {finish === null && (
+          <>
+            <QRCode value={url} size={300} />
+            <MaterialCommunityIcons
+              name="hand-coin-outline"
+              size={24}
+              onPress={handleClick}
+              color={theme.colors.primary}
+              style={{ marginTop: 20 }}
+            />
+            <Text style={{ marginTop: 20, maxWidth: 300 }} onPress={handleClick}>
+              {value}
+            </Text>
+            <IconButton icon="content-copy" onPress={() => handleCopyToClipboard(value)} />
+            <Text style={{ marginBottom: 20 }}> {invoice.expires_at}</Text>
+          </>
+        )}
       </View>
     );
   }
