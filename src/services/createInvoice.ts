@@ -4,7 +4,7 @@ export const createInvoice = async (token: string, amount: string, description: 
     method: 'POST',
     headers: new Headers({
       Authorization: 'Bearer ' + token,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     }),
     body: JSON.stringify({
       amount: parseInt(amount),

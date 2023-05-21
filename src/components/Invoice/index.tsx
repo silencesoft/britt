@@ -64,12 +64,8 @@ const CreateInvoice = (props: Props) => {
 
       const payment = await getPayment(user.accessToken, invoiceId, abortController);
 
-      if (payment) {
-        if (payment.status === 'paid') {
-          setFinish(true);
-        } else if (payment.status === 'expired') {
-          setFinish(false);
-        }
+      if (payment.payment_hash) {
+        setFinish(true);
       }
     };
 
@@ -112,19 +108,21 @@ const CreateInvoice = (props: Props) => {
         )}
         {finish && (
           <>
-            <Feather name="check-circle" size={48} color={theme.colors.primary} />
+            <Feather name="check-circle" size={48} color={theme.colors.primary} style={{ marginBottom: 20 }} />
             <Text>Payment Received</Text>
           </>
         )}
         {finish === false && (
           <>
-            <Feather name="x-circle" size={48} color={theme.colors.primary} />
+            <Feather name="x-circle" size={48} color={theme.colors.primary} style={{ marginBottom: 20 }} />
             <Text>Invoice Expired</Text>
           </>
         )}
         {finish === null && (
           <>
-            <QRCode value={url} size={300} />
+            <View style={{ backgroundColor: '#ffffff', width: 350, height: 350, padding: 25 }}>
+              <QRCode value={url} size={300} />
+            </View>
             <MaterialCommunityIcons
               name="hand-coin-outline"
               size={24}
@@ -200,8 +198,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
   },
   uploadingContainer: {
     flex: 1,
