@@ -8,5 +8,9 @@ export const getBalance = async (token: string) => {
   };
   const response = await fetch(endpoint, options);
 
+  if (response.status === 401) {
+    return { error: true };
+  }
+
   return response.json();
 };

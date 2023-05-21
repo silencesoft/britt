@@ -17,7 +17,7 @@ const SettingsScreen = (props: Props) => {
   const { settings, setValue } = useSettings();
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);
   const { isDarkTheme, setThemeType } = useTheme();
-  console.log({ settings });
+
   const handleLogout = () => {
     setUser('');
   };

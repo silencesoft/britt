@@ -27,7 +27,10 @@ export const userAtom = atom(
   }
 );
 
+export const resetBalanceAtom = atom(false);
+
 export const balanceAtom = atom(async (get) => {
+  const resetBalance = get(resetBalanceAtom);
   const user: TokenResponse = await get(userAtom);
   const token: TokenResponse = user; // await shouldUpdateToken(user);
   const balance: Balance = await getBalance(token.accessToken);

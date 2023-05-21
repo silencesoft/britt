@@ -1,8 +1,6 @@
 import * as AuthSession from 'expo-auth-session';
 import { RefreshTokenRequestConfig, TokenResponse } from 'expo-auth-session';
 
-import { save } from './store';
-
 export const shouldUpdateToken = async (tokenConfig: TokenResponse): Promise<TokenResponse> => {
   const tokenEndpoint = `${process.env.API_URL}/oauth/token`;
   let tokenResponse = new TokenResponse(tokenConfig);
@@ -19,7 +17,6 @@ export const shouldUpdateToken = async (tokenConfig: TokenResponse): Promise<Tok
 
     // pass our refresh token and get a new access token and new refresh token
     tokenResponse = await tokenResponse.refreshAsync(refreshConfig, endpointConfig);
-    save('code', JSON.stringify(tokenResponse));
   }
 
   return tokenResponse;
