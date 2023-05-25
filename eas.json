@@ -1,13 +1,15 @@
 {
   "cli": {
-    "version": ">= 3.9.0"
+    "version": ">= 3.9.0",
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
-        "resourceClass": "m-medium"
+        "resourceClass": "m-medium",
+        "simulator": true
       }
     },
     "preview": {
@@ -27,7 +29,14 @@
     "preview3": {
       "developmentClient": true
     },
+    "staging": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
     "production": {
+      "autoIncrement": true,
       "ios": {
         "resourceClass": "m-medium"
       }
