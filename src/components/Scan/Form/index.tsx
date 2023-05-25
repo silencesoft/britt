@@ -41,6 +41,7 @@ const Form = ({ invoice }: Props) => {
       <Text>Invoice Amount</Text>
       <View style={styles.formContainer}>
         <TextInput
+          disabled
           multiline={true}
           numberOfLines={3}
           style={styles.inputText}
@@ -52,6 +53,7 @@ const Form = ({ invoice }: Props) => {
       </View>
       <View style={styles.formContainer}>
         <TextInput
+          disabled
           style={styles.inputText}
           maxLength={20}
           value={amount}

@@ -7,6 +7,7 @@ import { Text } from 'react-native-paper';
 import { useBalance } from 'src/hooks/useBalance';
 import { useTheme } from 'src/providers/ThemeProvider';
 import { userAtom } from 'src/state/user';
+import { nFormatter } from 'src/utils/numericFormat';
 
 type Props = {};
 
@@ -24,7 +25,7 @@ const Balance = (props: Props) => {
       {!balance.error && (
         <>
           <Text variant="displayLarge">
-            {balance.balance} {balance.unit}{' '}
+            {nFormatter(balance.balance, 1)} {balance.unit} {' '}
           </Text>
           <Ionicons name="refresh-circle-outline" size={24} color={theme.colors.primary} onPress={reloadBalance} />
         </>
