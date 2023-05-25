@@ -2,7 +2,7 @@
   "expo": {
     "name": "Britt",
     "slug": "britt",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "owner": "silencesoft",
     "orientation": "portrait",
     "scheme": ["net.silencesoft.britt", "lightning"],
