@@ -57,7 +57,7 @@ const LoginScreen = (props: Props) => {
   );
 
   const handleLogin = async () => {
-    promptAsync({ showInRecents: true });
+    await promptAsync({ showInRecents: true });
   };
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const LoginScreen = (props: Props) => {
     void Linking.getInitialURL().then((url) => handleDeepLinking(url));
 
     return () => {
-      subscription.remove();
+      if (subscription) subscription.remove();
     };
   }, []);
 
@@ -96,7 +96,7 @@ const LoginScreen = (props: Props) => {
       <Text>Login</Text>
       <Text>API:: {serverUrl}</Text>
       <Button mode="contained" onPress={handleLogin} disabled={!request}>
-        Go
+        <Text variant="headlineSmall">Go</Text>
       </Button>
     </View>
   );

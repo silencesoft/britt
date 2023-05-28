@@ -25,7 +25,7 @@ const Balance = (props: Props) => {
       {!balance.error && (
         <>
           <Text variant="displayLarge">
-            {nFormatter(balance.balance, 1)} {balance.unit} {' '}
+            {nFormatter(balance.balance, 1)} {balance.unit}{' '}
           </Text>
           <Ionicons name="refresh-circle-outline" size={24} color={theme.colors.primary} onPress={reloadBalance} />
         </>
@@ -34,7 +34,7 @@ const Balance = (props: Props) => {
         <>
           <TouchableOpacity onPress={handleLogout} style={{ flexDirection: 'row', alignItems: 'center' }}>
             <MaterialIcons name="error" size={24} color={theme.colors.primary} />
-            <Text>Error. Please login again.</Text>
+            <Text variant="headlineSmall"> Error. Please login again.</Text>
           </TouchableOpacity>
         </>
       )}
