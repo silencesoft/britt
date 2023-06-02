@@ -2,13 +2,10 @@
   "expo": {
     "name": "Britt",
     "slug": "britt",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "owner": "silencesoft",
     "orientation": "portrait",
-    "scheme": [
-      "net.silencesoft.britt",
-      "lightning"
-    ],
+    "scheme": ["net.silencesoft.britt", "lightning"],
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -16,9 +13,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -43,10 +38,7 @@
             "scheme": "net.silencesoft.britt",
             "host": "net.silencesoft.britt"
           },
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ],
       "package": "net.silencesoft.britt",

@@ -1,14 +1,40 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useSetAtom } from 'jotai';
 import React, { useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import { externalInvoiceAtom } from 'src/state/invoice';
 
 type Props = {
   handleAuthenticate: () => void;
 };
 
 const Authentication = ({ handleAuthenticate }: Props) => {
+  const setExternalInvoice = useSetAtom(externalInvoiceAtom);
+
   useEffect(() => {
+    const handleDeepLinking = async (url: string | null): Promise<void> => {
+      if (!url) return;
+      const correctUrl = url.includes('#') ? url.replace('#', '?') : url;
+      const extPayment = correctUrl.startsWith('lightning');
+      if (extPayment) {
+        setExternalInvoice(correctUrl);
+      }
+    };
+
+    const listener = (event: { url: string }) => {
+      void handleDeepLinking(event.url);
+    };
+
+    const subscription = Linking.addEventListener('url', listener);
+
+    void Linking.getInitialURL().then((url) => handleDeepLinking(url));
+
     handleAuthenticate();
+
+    return () => {
+      if (subscription) subscription.remove();
+    };
   }, []);
 
   return (
