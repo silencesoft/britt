@@ -38,7 +38,7 @@ const MainNavigator = (props: Props) => {
       const secure = await LocalAuthentication.getEnrolledLevelAsync();
       // const compatible = await LocalAuthentication.hasHardwareAsync();
       // const biometricRecords = await LocalAuthentication.isEnrolledAsync();
-      setIsBiometricSupported(secure !== LocalAuthentication.SecurityLevel.NONE && settings.biometric);
+      setIsBiometricSupported(secure !== LocalAuthentication.SecurityLevel.NONE && settings?.biometric);
     })();
   });
 

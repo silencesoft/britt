@@ -5,7 +5,10 @@
     "version": "0.2.1",
     "owner": "silencesoft",
     "orientation": "portrait",
-    "scheme": ["net.silencesoft.britt", "lightning"],
+    "scheme": [
+      "net.silencesoft.britt",
+      "lightning"
+    ],
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -13,7 +16,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -22,7 +27,8 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "bundleIdentifier": "net.silencesoft.britt"
+      "bundleIdentifier": "net.silencesoft.britt",
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {
@@ -37,7 +43,10 @@
             "scheme": "net.silencesoft.britt",
             "host": "net.silencesoft.britt"
           },
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
       ],
       "package": "net.silencesoft.britt",
@@ -46,7 +55,8 @@
         "android.permission.USE_FINGERPRINT",
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
