@@ -29,7 +29,6 @@ const MainNavigator = (props: Props) => {
     });
     auth.then((result) => {
       setIsAuthenticated(result.success);
-      console.log(result);
     });
   };
 

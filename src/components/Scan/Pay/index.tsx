@@ -24,7 +24,6 @@ const Pay = ({ invoice, amount }: Props) => {
   useEffect(() => {
     const tryPayment = async () => {
       const response = await doPayment(user?.accessToken, invoice, amount);
-      console.log(response);
 
       if (!response?.destination) {
         setError(response.message);
