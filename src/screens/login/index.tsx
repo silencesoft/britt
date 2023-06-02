@@ -75,7 +75,6 @@ const LoginScreen = (props: Props) => {
     }
   }, [token]);
 
-
   const [url, setUrl] = useState('');
   // https://github.com/expo/expo/issues/12044
   useEffect(() => {
@@ -86,11 +85,11 @@ const LoginScreen = (props: Props) => {
       const urlObject = new URL(correctUrl);
       const accessToken = urlObject.searchParams.get('code');
       const extPayment = correctUrl.startsWith('lightning');
+      // const refreshToken = ''; // urlObject.searchParams.get('refresh_token');
+      console.log({ url, correctUrl, accessToken, extPayment });
       if (extPayment) {
         setExternalInvoice(correctUrl);
       }
-      // const refreshToken = ''; // urlObject.searchParams.get('refresh_token');
-      console.log({ url, correctUrl, accessToken });
       if (!accessToken) return;
       setCode(accessToken);
     };
