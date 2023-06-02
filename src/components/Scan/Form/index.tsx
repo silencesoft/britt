@@ -1,10 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
+import { useSetAtom } from 'jotai';
 import { decode } from 'light-bolt11-decoder';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 
 import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { externalInvoiceAtom } from 'src/state/invoice';
 import Pay from '../Pay';
 
 type Props = {
@@ -16,6 +18,12 @@ const Form = ({ invoice }: Props) => {
   const [value, setValue] = useState(invoice);
   const [payment, setPayment] = useState(false);
   const navigation = useNavigation<RootStackParamList>();
+  const setExternalInvoice = useSetAtom(externalInvoiceAtom);
+
+  const handleCancel = () => {
+    navigation.goBack();
+    setExternalInvoice('');
+  };
 
   useEffect(() => {
     try {
@@ -62,7 +70,7 @@ const Form = ({ invoice }: Props) => {
         />
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button}>
+        <TouchableOpacity onPress={handleCancel} style={styles.button}>
           <Button icon="close" mode="outlined">
             Cancel
           </Button>

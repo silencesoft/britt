@@ -7,6 +7,7 @@ import { Linking, StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
 import { useAutoExchange } from 'src/hooks/useAutoExchange';
+import { externalInvoiceAtom } from 'src/state/invoice';
 import { userAtom } from 'src/state/user';
 
 WebBrowser.maybeCompleteAuthSession();
@@ -55,6 +56,7 @@ const LoginScreen = (props: Props) => {
     request?.codeVerifier,
     code // response?.type === 'success' ? response.params.code : undefined
   );
+  const setExternalInvoice = useSetAtom(externalInvoiceAtom);
 
   const handleLogin = async () => {
     await promptAsync({ showInRecents: true });
@@ -73,7 +75,10 @@ const LoginScreen = (props: Props) => {
       const correctUrl = url.includes('#') ? url.replace('#', '?') : url;
       const urlObject = new URL(correctUrl);
       const accessToken = urlObject.searchParams.get('code');
-      // const refreshToken = ''; // urlObject.searchParams.get('refresh_token');
+      const extPayment = correctUrl.startsWith('lightning');
+      if (extPayment) {
+        setExternalInvoice(correctUrl);
+      }
       if (!accessToken) return;
       setCode(accessToken);
     };

@@ -1,11 +1,12 @@
 import { Feather } from '@expo/vector-icons';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Text } from 'react-native-paper';
 
 import { useTheme } from 'src/providers/ThemeProvider';
 import { doPayment } from 'src/services/doPayment';
+import { externalInvoiceAtom } from 'src/state/invoice';
 import { userAtom } from 'src/state/user';
 
 type Props = {
@@ -19,7 +20,8 @@ const Pay = ({ invoice, amount }: Props) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const user = useAtomValue(userAtom);
-  const {theme} = useTheme();
+  const setExternalInvoice = useSetAtom(externalInvoiceAtom);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const tryPayment = async () => {
@@ -29,6 +31,7 @@ const Pay = ({ invoice, amount }: Props) => {
         setError(response.message);
       } else {
         setSuccess(true);
+        setExternalInvoice('');
       }
     };
 
