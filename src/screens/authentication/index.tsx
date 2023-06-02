@@ -14,6 +14,7 @@ const Authentication = ({ handleAuthenticate }: Props) => {
 
   useEffect(() => {
     const handleDeepLinking = async (url: string | null): Promise<void> => {
+      console.log({ url });
       if (!url) return;
       const correctUrl = url.includes('#') ? url.replace('#', '?') : url;
       const extPayment = correctUrl.startsWith('lightning');
