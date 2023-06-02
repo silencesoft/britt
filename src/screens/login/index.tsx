@@ -75,9 +75,6 @@ const LoginScreen = (props: Props) => {
     }
   }, [token]);
 
-  const [url, setUrl] = useState('');
-
-  // Fix from https://github.com/expo/expo/issues/12044
 
   const [url, setUrl] = useState('');
   // https://github.com/expo/expo/issues/12044

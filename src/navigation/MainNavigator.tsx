@@ -41,6 +41,7 @@ const MainNavigator = (props: Props) => {
     })();
   });
 
+  console.log({ user, isBiometricSupported, isAuthenticated });
   if (user && isBiometricSupported && !isAuthenticated) {
     return (
       <>
