@@ -17,6 +17,7 @@ const Authentication = ({ handleAuthenticate }: Props) => {
       if (!url) return;
       const correctUrl = url.includes('#') ? url.replace('#', '?') : url;
       const extPayment = correctUrl.startsWith('lightning');
+      console.log({ url, correctUrl, extPayment });
       if (extPayment) {
         setExternalInvoice(correctUrl);
       }
