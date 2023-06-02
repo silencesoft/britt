@@ -12,6 +12,7 @@ type Props = {};
 const HomeScreen = (props: Props) => {
   const navigation = useNavigation<RootStackParamList>();
   const externalInvoice = useAtomValue(externalInvoiceAtom);
+  console.log({ externalInvoice });
 
   useEffect(() => {
     if (externalInvoice) {
