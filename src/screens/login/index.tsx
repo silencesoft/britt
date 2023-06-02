@@ -3,7 +3,7 @@ import Constants from 'expo-constants';
 import * as WebBrowser from 'expo-web-browser';
 import { useSetAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
-import { Linking, StyleSheet, View } from 'react-native';
+import { Image, Linking, StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
 import { useAutoExchange } from 'src/hooks/useAutoExchange';
@@ -98,10 +98,14 @@ const LoginScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require('../../../assets/adaptive-icon.png')}
+        style={{ width: 180, height: 180, marginBottom: 20 }}
+      />
       <Text>Login</Text>
       <Text>API:: {serverUrl}</Text>
-      <Button mode="contained" onPress={handleLogin} disabled={!request}>
-        <Text variant="headlineSmall">Go</Text>
+      <Button mode="contained" onPress={handleLogin} disabled={!request} style={{ marginTop: 40 }}>
+        <Text>Go</Text>
       </Button>
     </View>
   );
