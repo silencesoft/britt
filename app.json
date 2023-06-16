@@ -23,7 +23,7 @@
         "usesNonExemptEncryption": false
       },
       "bundleIdentifier": "net.silencesoft.britt",
-      "buildNumber": "3"
+      "buildNumber": "4"
     },
     "android": {
       "adaptiveIcon": {
@@ -48,7 +48,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"

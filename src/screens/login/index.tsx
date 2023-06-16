@@ -4,7 +4,15 @@ import * as WebBrowser from 'expo-web-browser';
 import { useSetAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { Image, Linking, StyleSheet, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
+import Animated, {
+  runOnJS,
+  useAnimatedReaction,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { useAutoExchange } from 'src/hooks/useAutoExchange';
 import { externalInvoiceAtom } from 'src/state/invoice';
@@ -14,9 +22,10 @@ WebBrowser.maybeCompleteAuthSession();
 
 type Props = {};
 
+const IMAGE_SIZE = 200;
+
 const LoginScreen = (props: Props) => {
   const setUser = useSetAtom(userAtom);
-  const serverUrl = process.env.LOGIN_URL;
   const clientId = process.env.CLIENT_ID || '';
   const EXPO_REDIRECT_PARAMS = { useProxy: true };
   const NATIVE_REDIRECT_PARAMS = {};
@@ -57,10 +66,31 @@ const LoginScreen = (props: Props) => {
     code // response?.type === 'success' ? response.params.code : undefined
   );
   const setExternalInvoice = useSetAtom(externalInvoiceAtom);
+  const size = useSharedValue(2);
+  const opacity = useSharedValue(0);
+  const style = useAnimatedStyle(() => ({
+    width: size.value * IMAGE_SIZE,
+  }));
+  const buttonStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
+  const [imageWidth, setImageWidth] = useState(IMAGE_SIZE);
 
   const handleLogin = async () => {
     await promptAsync({ showInRecents: true });
   };
+
+  useEffect(() => {
+    size.value = withDelay(700, withTiming(1, { duration: 700 }));
+    opacity.value = withDelay(1000, withTiming(1, { duration: 700 }));
+  }, []);
+
+  useAnimatedReaction(
+    () => size.value,
+    (currentValue) => {
+      runOnJS(setImageWidth)(currentValue * IMAGE_SIZE);
+    }
+  );
 
   useEffect(() => {
     if (token?.accessToken) {
@@ -98,15 +128,17 @@ const LoginScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../../assets/adaptive-icon.png')}
-        style={{ width: 180, height: 180, marginBottom: 20 }}
-      />
-      <Text>Login</Text>
-      <Text>API:: {serverUrl}</Text>
-      <Button mode="contained" onPress={handleLogin} disabled={!request} style={{ marginTop: 40 }}>
-        <Text>Go</Text>
-      </Button>
+      <Animated.View style={style}>
+        <Image
+          source={require('../../../assets/adaptive-icon.png')}
+          style={{ width: imageWidth, height: imageWidth, marginBottom: 20 }}
+        />
+      </Animated.View>
+      <Animated.View style={buttonStyle}>
+        <Button mode="contained" onPress={handleLogin} disabled={!request}>
+          Continue with Alby
+        </Button>
+      </Animated.View>
     </View>
   );
 };
