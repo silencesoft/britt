@@ -1,3 +1,5 @@
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json';
 import React from 'react';
 import 'react-native-get-random-values';
 import 'react-native-url-polyfill/auto';
@@ -24,6 +26,8 @@ if (typeof atob === 'undefined') {
     return Buffer.from(b64Encoded, 'base64').toString('binary');
   };
 }
+
+TimeAgo.addDefaultLocale(en);
 
 export default function App() {
   return (

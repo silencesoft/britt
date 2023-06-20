@@ -11,6 +11,8 @@ import PayScreen from 'src/screens/pay';
 import ReceiveScreen from 'src/screens/receive';
 import { userAtom } from 'src/state/user';
 import ScreenNavigator from './ScreenNavigator';
+import PaymentsNavigator from './PaymentsNavigator';
+import Payment from 'src/screens/payment';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -56,6 +58,8 @@ const MainNavigator = (props: Props) => {
           <Stack.Screen name="Screen" component={ScreenNavigator} />
           <Stack.Screen name="Receive" component={ReceiveScreen} />
           <Stack.Screen name="Pay" component={PayScreen} initialParams={{ invoice: '' }} />
+          <Stack.Screen name="Payments" component={PaymentsNavigator} />
+          <Stack.Screen name="Payment" component={Payment} initialParams={{ invoice: {} }} />
         </>
       )}
       {!user && <Stack.Screen name="Login" component={LoginScreen} />}

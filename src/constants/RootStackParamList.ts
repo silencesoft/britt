@@ -1,3 +1,5 @@
+import { Payment } from 'src/interfaces/payment';
+
 export type RootStackParamList = {
   Screen: undefined;
   Login: undefined;
@@ -6,4 +8,8 @@ export type RootStackParamList = {
   Settings: undefined;
   Receive: undefined;
   Pay: { invoice: string };
+  Payments: undefined;
+  PaymentsIncoming: { type: number };
+  PaymentsOutgoing: { type: number };
+  Payment: { invoice: Payment };
 };

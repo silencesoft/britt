@@ -30,6 +30,11 @@ const Menu = (props: Props) => {
             label: 'Receive',
             onPress: () => navigation.navigate('Receive'),
           },
+          {
+            icon: 'currency-usd',
+            label: 'Invoices',
+            onPress: () => navigation.navigate('Payments'),
+          },
         ]}
         onStateChange={onStateChange}
         onPress={() => {
