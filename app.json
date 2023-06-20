@@ -2,7 +2,7 @@
   "expo": {
     "name": "Britt",
     "slug": "britt",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "owner": "silencesoft",
     "orientation": "portrait",
     "scheme": ["net.silencesoft.britt", "lightning"],
@@ -23,7 +23,7 @@
         "usesNonExemptEncryption": false
       },
       "bundleIdentifier": "net.silencesoft.britt",
-      "buildNumber": "4"
+      "buildNumber": "5"
     },
     "android": {
       "adaptiveIcon": {
@@ -48,7 +48,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "versionCode": 4
+      "versionCode": 5
     },
     "web": {
       "favicon": "./assets/favicon.png"
