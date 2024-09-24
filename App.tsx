@@ -2,7 +2,6 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import React from 'react';
 import 'react-native-get-random-values';
-import 'react-native-url-polyfill/auto';
 import * as encoding from 'text-encoding';
 
 import MainNavigator from 'src/navigation/MainNavigator';
