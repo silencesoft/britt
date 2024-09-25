@@ -94,7 +94,7 @@ const Scan = (props: Props) => {
             style={{ padding: 16 }}
             onPress={toggleCameraFacing}
           >
-            <IconButton icon="flash" />
+            <IconButton icon="camera-flip" />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
