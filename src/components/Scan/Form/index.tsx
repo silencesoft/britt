@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { RootNavProps } from 'src/constants/RootNavProps';
 import { externalInvoiceAtom } from 'src/state/invoice';
 import Pay from '../Pay';
 
@@ -17,7 +17,7 @@ const Form = ({ invoice }: Props) => {
   const [amount, setAmount] = useState('');
   const [value, setValue] = useState(invoice);
   const [payment, setPayment] = useState(false);
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
   const setExternalInvoice = useSetAtom(externalInvoiceAtom);
 
   const handleCancel = () => {

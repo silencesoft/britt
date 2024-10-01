@@ -3,7 +3,7 @@ import * as LocalAuthentication from "expo-local-authentication";
 import { useAtomValue } from "jotai";
 import React, { useEffect, useState } from "react";
 
-import { RootStackParamList } from "src/constants/RootStackParamList";
+import { RootNavProps } from "src/constants/RootNavProps";
 import { useSettings } from "src/hooks/useSettings";
 import { Payment as PaymentType } from "src/interfaces/payment";
 import Authentication from "src/screens/authentication";
@@ -15,7 +15,7 @@ import { userAtom } from "src/state/user";
 import ScreenNavigator from "./ScreenNavigator";
 import PaymentsNavigator from "./PaymentsNavigator";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootNavProps>();
 
 type Props = {};
 

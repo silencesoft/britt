@@ -4,13 +4,13 @@ import { View } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { TabScreen, Tabs } from 'react-native-paper-tabs';
 
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { RootNavProps } from 'src/constants/RootNavProps';
 import PaymentsScreen from 'src/screens/payments';
 
 type Props = {};
 
 const PaymentsNavigator = (props: Props) => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
 
   return (
     <>

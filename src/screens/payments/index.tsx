@@ -6,7 +6,7 @@ import { DataTable, IconButton, Text } from 'react-native-paper';
 import ReactTimeAgo from 'react-time-ago';
 
 import Time from 'src/components/common/Time';
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { RootNavProps } from 'src/constants/RootNavProps';
 import { usePayments } from 'src/hooks/usePayments';
 import { Payment } from 'src/interfaces/payment';
 import { userAtom } from 'src/state/user';
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const PaymentsScreen = ({ type }: Props) => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
   const user = useAtomValue(userAtom);
   const { incomingPayments, outgoingPayments } = usePayments();
   const data = type === 0 ? incomingPayments : outgoingPayments;

@@ -2,13 +2,13 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FAB, Portal } from 'react-native-paper';
 
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { RootNavProps } from 'src/constants/RootNavProps';
 
 type Props = {};
 
 const Menu = (props: Props) => {
   const [state, setState] = useState({ open: false });
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
 
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
 

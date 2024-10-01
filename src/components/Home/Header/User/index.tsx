@@ -5,7 +5,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { RootNavProps } from 'src/constants/RootNavProps';
 import { useTheme } from 'src/providers/ThemeProvider';
 import { profileAtom } from 'src/state/user';
 import { save } from 'src/utils/store';
@@ -13,7 +13,7 @@ import { save } from 'src/utils/store';
 type Props = {};
 
 const User = (props: Props) => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
   const profile = useAtomValue(profileAtom);
   const { theme } = useTheme();
 

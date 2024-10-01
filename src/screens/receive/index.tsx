@@ -4,12 +4,12 @@ import { StyleSheet, View } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import CreateInvoice from 'src/components/Invoice';
 
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { RootNavProps } from 'src/constants/RootNavProps';
 
 type Props = {};
 
 const ReceiveScreen = (props: Props) => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
 
   return (
     <View style={styles.container}>

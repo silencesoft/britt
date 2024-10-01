@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import {
   CameraView,
   CameraType,
@@ -9,18 +9,19 @@ import * as Clipboard from "expo-clipboard";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { Button, IconButton } from "react-native-paper";
-import { Platform } from "expo-modules-core";
 
-import { RootStackParamList } from "src/constants/RootStackParamList";
+import { RootNavProps } from "src/constants/RootStackParamList";
+
 
 type Props = {};
 
 const Scan = (props: Props) => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
   const [cameraFlash, setCameraFlash] = useState("off");
   const [invoice, setInvoice] = useState("");
   const [permission, requestPermission] = useCameraPermissions();
   const [facing, setFacing] = useState<CameraType>("back");
+  const isFocused = useIsFocused();
 
   const handleCodeScanned = async ({ data }: BarcodeScanningResult) => {
     const invoice = data.replace("lightning:", "");
@@ -30,18 +31,9 @@ const Scan = (props: Props) => {
 
   const handlePaste = async () => {
     try {
-      // const { state } =
-      //   Platform.OS === 'web'
-      //     ? await navigator.permissions.query({
-      //         name: 'clipboard-write',
-      //       })
-      //     : { state: 'granted' };
-      // if (state == 'granted' || state == 'prompt') {
-
       const text = await Clipboard.getStringAsync();
 
       setInvoice(text.replace("lightning:", ""));
-      // }
     } catch (err) {
       console.log(err);
     }
@@ -74,47 +66,57 @@ const Scan = (props: Props) => {
     );
   }
 
+  if (!isFocused) {
+    return (
+      <View style={styles.container}>
+        <Text>&nbsp;</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <CameraView
-        style={{ flex: 1, width: "100%" }}
-        facing={facing}
-        barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
-        onBarcodeScanned={handleCodeScanned}
-      >
-        <View
-          style={{
-            position: "absolute",
-            right: 30,
-            bottom: 40,
-            flexDirection: "column",
-          }}
+      {isFocused && (
+        <CameraView
+          style={{ flex: 1, width: "100%" }}
+          facing={facing}
+          barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
+          onBarcodeScanned={handleCodeScanned}
         >
-          <TouchableOpacity
-            style={{ padding: 16 }}
-            onPress={toggleCameraFacing}
+          <View
+            style={{
+              position: "absolute",
+              right: 30,
+              bottom: 40,
+              flexDirection: "column",
+            }}
           >
-            <IconButton icon="camera-flip" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              setCameraFlash(cameraFlash === "off" ? "torch" : "off")
-            }
-            style={{ padding: 16 }}
-          >
-            <IconButton icon="flash" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handlePaste} style={{ padding: 16 }}>
-            <IconButton icon="content-paste" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Home")}
-            style={{ padding: 16 }}
-          >
-            <IconButton icon="close" />
-          </TouchableOpacity>
-        </View>
-      </CameraView>
+            <TouchableOpacity
+              style={{ padding: 16 }}
+              onPress={toggleCameraFacing}
+            >
+              <IconButton icon="camera-flip" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                setCameraFlash(cameraFlash === "off" ? "torch" : "off")
+              }
+              style={{ padding: 16 }}
+            >
+              <IconButton icon="flash" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handlePaste} style={{ padding: 16 }}>
+              <IconButton icon="content-paste" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Home")}
+              style={{ padding: 16 }}
+            >
+              <IconButton icon="close" />
+            </TouchableOpacity>
+          </View>
+        </CameraView>
+      )}
     </View>
   );
 };

@@ -6,12 +6,12 @@ import { Appbar, IconButton, Text } from 'react-native-paper';
 import ReactTimeAgo from 'react-time-ago';
 
 import Time from 'src/components/common/Time';
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { RootNavProps } from 'src/constants/RootNavProps';
 
-interface Props extends NativeStackScreenProps<RootStackParamList, 'Payment'> {}
+interface Props extends NativeStackScreenProps<RootNavProps, 'Payment'> {}
 
 const Payment = ({ route }: Props) => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
   const invoice = route?.params?.invoice;
 
   return (

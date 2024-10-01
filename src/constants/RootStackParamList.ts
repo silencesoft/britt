@@ -1,3 +1,4 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Payment } from 'src/interfaces/payment';
 
 export type RootStackParamList = {
@@ -13,3 +14,5 @@ export type RootStackParamList = {
   PaymentsOutgoing: { type: number };
   Payment: { invoice: Payment };
 };
+
+export type RootNavProps = NativeStackNavigationProp<RootStackParamList>;

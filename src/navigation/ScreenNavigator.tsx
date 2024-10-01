@@ -4,13 +4,13 @@ import React from "react";
 import { View } from "react-native";
 import PaginationDot from "react-native-animated-pagination-dot";
 
-import { RootStackParamList } from "src/constants/RootStackParamList";
+import { RootNavProps } from "src/constants/RootNavProps";
 import { useTheme } from "src/providers/ThemeProvider";
 import HomeScreen from "src/screens/home";
 import ScanScreen from "src/screens/scan";
 import SettingsScreen from "src/screens/settings";
 
-const Tab = createMaterialTopTabNavigator<RootStackParamList>();
+const Tab = createMaterialTopTabNavigator<RootNavProps>();
 
 type Props = {};
 

@@ -4,14 +4,14 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import Home from 'src/components/Home';
-import { RootStackParamList } from 'src/constants/RootStackParamList';
+import { RootNavProps } from 'src/constants/RootNavProps';
 import { externalInvoiceAtom } from 'src/state/invoice';
 import { sleep } from 'src/utils/sleep';
 
 type Props = {};
 
 const HomeScreen = (props: Props) => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<RootNavProps>();
   const externalInvoice = useAtomValue(externalInvoiceAtom);
 
   useEffect(() => {
