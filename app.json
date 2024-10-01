@@ -2,7 +2,7 @@
   "expo": {
     "name": "Britt",
     "slug": "britt",
-    "version": "0.4.0",
+    "version": "0.5.1",
     "owner": "silencesoft",
     "orientation": "portrait",
     "scheme": [
@@ -56,7 +56,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "versionCode": 5
+      "versionCode": 7
     },
     "web": {
       "favicon": "./assets/favicon.png"
